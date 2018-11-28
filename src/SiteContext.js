@@ -1,15 +1,20 @@
 import React, {Component} from 'react'
 
 const SiteContext = React.createContext({
-    screenName: 'Home',
-    updateScreenName: () => null
+    screenName: null,
+    updateScreenName: () => null,
+    user: null
   })
   
   export const SiteConsumer = SiteContext.Consumer
   
   export class SiteProvider extends Component {
     state = {
-      screenName: 'Home'
+      screenName: 'Home',
+      user: {
+        name: 'Marcus Henderson',
+        provider: 'UWN Belltown Clinic'
+      }
     }
 
     updateScreenName = name => {
@@ -23,7 +28,8 @@ const SiteContext = React.createContext({
         <SiteContext.Provider
           value={{
             screenName: this.state.screenName,
-            updateScreenName: this.updateScreenName
+            updateScreenName: this.updateScreenName,
+            user: this.state.user
           }}
         >
           {this.props.children}

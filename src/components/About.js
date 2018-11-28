@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
+import {SiteConsumer} from '../SiteContext'
 
 class About extends Component {
     render() {
@@ -7,7 +8,7 @@ class About extends Component {
       return (
         <Button
           title="Go back home"
-          onPress={() => navigate('Home')}
+          onPress={() => {navigate('Home'); this.props.updateScreenName('Home')}}
         />
       );
     }
@@ -22,4 +23,10 @@ const styles = StyleSheet.create({
     }
   })
 
-export default About
+export default ({navigation}) => (
+  <SiteConsumer>
+    {({updateScreenName}) => (
+      <About updateScreenName={updateScreenName} navigation={navigation}/>
+    )}
+  </SiteConsumer>
+)

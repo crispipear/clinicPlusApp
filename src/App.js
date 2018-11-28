@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Container from './components/Container'
 import {SiteProvider} from './SiteContext'
 
+console.disableYellowBox = true;
 const backgroundColor = ['#FFFFFF', '#EDF0E7']
 
 export default class App extends Component {
