@@ -1,19 +1,32 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, Image, Alert} from 'react-native';
+import {SiteConsumer} from '../SiteContext'
 
-export default class HomeButton extends Component {
+class HomeButton extends Component {
+    _handlePress = () => {
+        if(this.props.screen){
+            const {navigate} = this.props.navigation
+            navigate(this.props.screen)
+            this.props.updateScreenName(this.props.name)
+        }else{
+            Alert.alert(
+                'feature under development',
+                'come back later',
+                [
+                  {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            )
+        }
+
+    }
     render() {
-      const {navigate} = this.props.navigation;
       return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={this._handlePress} style={styles.container}>
             <Image style={styles.image} resizeMode="contain" source={this.props.icon}/>
             <Text style={styles.text}>{this.props.name}</Text>
         </TouchableOpacity>
-      );
-        // <Button
-        //   title="Go to about"
-        //   onPress={() => {navigate('About'); this.props.updateScreenName('About')}}
-        // />
+      )
     }
 }
 
@@ -45,3 +58,17 @@ const styles = StyleSheet.create({
         height: 75
     }
 })
+
+export default ({icon, name, screen, navigation}) => (
+    <SiteConsumer>
+      {({updateScreenName}) => (
+        <HomeButton
+            icon={icon}
+            name={name}
+            screen={screen}
+            updateScreenName={updateScreenName} 
+            navigation={navigation}
+        />
+      )}
+    </SiteConsumer>
+)

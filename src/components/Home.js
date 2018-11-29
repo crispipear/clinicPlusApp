@@ -7,7 +7,8 @@ import Banner from './Banner';
 const buttons = [
   {
     name: 'Schedule\nAppointment',
-    icon: require('../assets/icon_appointment.png')
+    icon: require('../assets/icon_appointment.png'),
+    screen: 'Schedule'
   },
   {
     name: 'Clinic\nLobby',
@@ -16,6 +17,7 @@ const buttons = [
   {
     name: 'Medical\nRecords',
     icon: require('../assets/icon_records.png')
+
   },
   {
     name: 'Check\nPrescriptions',
@@ -33,7 +35,12 @@ class Home extends Component {
           <View style={styles.bottom}>
             {
               buttons.map((button, key) => (
-                <HomeButton key={key} icon={button.icon} name={button.name} navigation={this.props.navigation}/>
+                <HomeButton key={key} 
+                  icon={button.icon} 
+                  name={button.name} 
+                  screen={button.screen}
+                  navigation={this.props.navigation}
+                />
               ))
             }
           </View>

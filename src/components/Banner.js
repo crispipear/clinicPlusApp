@@ -19,8 +19,8 @@ export default class Banner extends Component {
 const styles = StyleSheet.create({
     container:{
         width: '100%',
-        height: 90,
-        marginBottom: 15,
+        height: 80,
+        marginBottom: 10,
         shadowColor: "#4e4c59",
         shadowOpacity: 0.15,
         shadowRadius: 7.5,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     topText:{
         fontSize: 12,
         color: '#4e4c59',
-        marginBottom: 7.5
+        marginBottom: 5
     },
     bottomText:{
         fontSize: 18,
