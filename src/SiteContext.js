@@ -20,6 +20,7 @@ const SiteContext = React.createContext({
       appointment: {
         selectedDate: 24,
         selectedTime: null,
+        selectedSymptoms: [],
         times: [
           {
               date: 24,
@@ -45,7 +46,19 @@ const SiteContext = React.createContext({
 
     updateAppointment = (type, val) => {
       let updated = this.state.appointment
-      updated[type] = val
+      if(type == 'selectedSymptoms'){
+        let symptoms = updated.selectedSymptoms.slice()
+        if (symptoms.includes(val)){
+          let index = symptoms.indexOf(val)
+          symptoms.splice(index, 1)
+        }else{
+          symptoms.splice(0, 0, val)          
+        }
+        updated[type] = symptoms
+      }else{
+        updated[type] = val
+      }
+      console.log(updated[type])
       this.setState({
         appointment: updated
       })
