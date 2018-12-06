@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import ScheduleCalendar from './schedule_calendar'
-export default class ScheduleTime extends Component {
+import ScheduleCalendar from './schedule_calendar';
+import {SiteConsumer} from '../SiteContext';
+
+class ScheduleTime extends Component {
     state={
-        calendar: true,
-        time: null
+        calendar: false
     }
     _openCalendar = () => {
         this.setState({
@@ -25,8 +26,8 @@ export default class ScheduleTime extends Component {
                 ?<ScheduleCalendar closeCalendar={this.closeCalendar}/>
                 :<TouchableOpacity style={styles.textContainer} onPress={this._openCalendar}>
                     {
-                        this.state.time
-                        ?<Text style={styles.text}>{this.state.time}</Text>
+                        this.props.appointment.selectedTime
+                        ?<Text style={styles.text}>{this.props.appointment.selectedTime}</Text>
                         :<Text style={styles.text}>select appointment time</Text>
                     }
                 </TouchableOpacity>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     text:{
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '600',
         color: '#4d60a1',
         textAlign: 'center',
@@ -54,7 +55,17 @@ const styles = StyleSheet.create({
     textContainer:{
         flex: 1,
         backgroundColor:'#edf0f7',
-        padding: 10,
+        padding: 12.5,
         marginVertical: 15,
     }
 })
+
+export default ({close}) => (
+    <SiteConsumer>
+      {({appointment}) => (
+        <ScheduleTime
+            appointment={appointment}
+        />
+      )}
+    </SiteConsumer>
+)
