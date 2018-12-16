@@ -1,23 +1,30 @@
 import React, {Component} from 'react'
+import SocketIOClient from 'socket.io-client'
+
+const socket = SocketIOClient('http://localhost:3000')
 
 const SiteContext = React.createContext({
     screenName: null,
     updateScreenName: () => null,
     user: {},
     appointment: {},
-    updateAppointment: () => null
+    updateAppointment: () => null,
+    makeAppointment: () => null
   })
   
   export const SiteConsumer = SiteContext.Consumer
   
   export class SiteProvider extends Component {
+    
     state = {
       screenName: 'Home',
       user: {
         name: 'Marcus Henderson',
+        id: 1105,
         provider: 'UWN Belltown Clinic'
       },
       appointment: {
+        selectedType: null,
         selectedDate: 24,
         selectedTime: null,
         selectedSymptoms: [],
@@ -58,11 +65,27 @@ const SiteContext = React.createContext({
       }else{
         updated[type] = val
       }
-      console.log(updated[type])
       this.setState({
         appointment: updated
       })
     }
+
+    makeAppointment = () => {
+      let a = this.state.appointment
+      socket.emit('create_appointment', {
+        type: 'appointments',
+        action: 'create',
+        id: 10135,
+        dataComponent: {
+          user: this.state.user.id,
+          type: a.selectedType,
+          date: `04/${a.selectedDate}/2018`,
+          time: a.selectedTime,
+          symptoms: a.selectedSymptoms
+        }
+      })
+    }
+
     render(){
       return(
         <SiteContext.Provider
@@ -71,7 +94,8 @@ const SiteContext = React.createContext({
             updateScreenName: this.updateScreenName,
             user: this.state.user,
             appointment: this.state.appointment,
-            updateAppointment: this.updateAppointment
+            updateAppointment: this.updateAppointment,
+            makeAppointment: this.makeAppointment
           }}
         >
           {this.props.children}

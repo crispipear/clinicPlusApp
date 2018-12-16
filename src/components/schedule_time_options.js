@@ -25,7 +25,7 @@ class TimeOptions extends Component{
 
 class TimeButton extends Component{
     _handlePress = () => {
-        let date = `04/${this.props.date}/2018, ${this.props.time}`
+        let date = this.props.time
         this.props.updateAppointment('selectedTime', date)
         this.props.close()
     }

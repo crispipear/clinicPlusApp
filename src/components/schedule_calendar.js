@@ -54,11 +54,12 @@ export default class ScheduleCalendar extends Component {
 const styles = StyleSheet.create({
     container:{
         flex: 1,
+        height: 450,
         marginVertical: 15
     },
     calendar:{
         width:'100%',
-        minHeight: 250,
+        minHeight: 310,
         backgroundColor: 'white',
         shadowColor: "#4d60a1",
         shadowOffset: {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     },
     datesHeader:{
         height: 30,
-        marginVertical: 5,
+        marginTop: 10,
         letterSpacing: 1,
         display: 'flex',
         flexDirection: 'row',

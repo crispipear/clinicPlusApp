@@ -5,8 +5,8 @@ import ScheduleScreen from './Schedule';
 
 const Container = createStackNavigator(
     {
-        Schedule: {screen: ScheduleScreen},
         Home: {screen: HomeScreen},
+        Schedule: {screen: ScheduleScreen}
     },
     {
         headerMode: 'none',

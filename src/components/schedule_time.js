@@ -27,7 +27,7 @@ class ScheduleTime extends Component {
                 :<TouchableOpacity style={styles.textContainer} onPress={this._openCalendar}>
                     {
                         this.props.appointment.selectedTime
-                        ?<Text style={styles.text}>{this.props.appointment.selectedTime}</Text>
+                        ?<Text style={styles.text}>04/{this.props.appointment.selectedDate}/2018 {this.props.appointment.selectedTime}</Text>
                         :<Text style={styles.text}>select appointment time</Text>
                     }
                 </TouchableOpacity>
